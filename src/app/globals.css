@@ -1,26 +1,47 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Custom global styles for polished UI */
+:root{--bg:#f7fafc;--card:#fff;--muted:#6b7280;--accent:#2563eb;--accent-600:#1e40af;--danger:#ef4444;--radius:8px;--container-max:1000px}
+
+@layer base{
+	html,body,#root{height:100%;background-color:var(--bg);color:#0f172a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+	main,.app-root{max-width:var(--container-max);margin:32px auto;padding:24px}
+	h1{font-size:48px;line-height:1;margin:0 0 24px 0;font-weight:800;color:#0b1220}
+	h2{font-size:24px;margin:18px 0;color:#0b1220;font-weight:700}
+	form{background:transparent;padding-bottom:8px}
+	input[type="text"],input[type="url"],input,textarea{width:100%;display:block;box-sizing:border-box;padding:10px 12px;border-radius:6px;border:1px solid #cbd5e1;background:var(--card);margin:6px 0 12px 0;font-size:15px;outline:none;transition:box-shadow .12s ease,border-color .12s ease}
+	input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 4px 14px rgba(37,99,235,0.12)}
+	.btn,button{display:inline-block;background:var(--accent);color:#fff;border:none;padding:10px 16px;border-radius:6px;font-weight:600;cursor:pointer;transition:background .12s ease,transform .06s ease;box-shadow:0 2px 6px rgba(2,6,23,0.08)}
+	.btn:hover,button:hover{background:var(--accent-600);transform:translateY(-1px)}
+	.bookmarks-list{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+	.bookmark-item{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid #e6edf3;padding:10px 12px;border-radius:6px;box-shadow:0 1px 0 rgba(2,6,23,0.02) inset}
+	.bookmark-item a{color:var(--accent);text-decoration:underline;font-weight:600;max-width:calc(100% - 110px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+	.bookmark-controls{display:flex;gap:8px;align-items:center}
+	.btn--danger{background:var(--danger);box-shadow:none;padding:6px 10px;border-radius:6px}
+	.btn--ghost{background:transparent;color:var(--accent-600);border:1px solid rgba(37,99,235,0.08)}
+	body:has(main:only-child) .login-button,.login-wrapper,.login-container{display:flex;justify-content:center;align-items:center;min-height:60vh}
+	@media (max-width:640px){h1{font-size:36px}main{padding:16px}.bookmark-item a{max-width:60%}}
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Specific override for the bookmarks page inner container (Tailwind classes: p-6 max-w-xl mx-auto)
+	 Keep it as a centered card of 800px with comfortable padding on all sides. */
+.p-6.max-w-xl.mx-auto{
+	max-width:800px !important;
+	padding:28px !important;
+	margin:40px auto !important;
+	background:var(--card);
+	border-radius:12px;
+	box-shadow:0 8px 30px rgba(15,23,42,0.06);
+	border:1px solid rgba(2,6,23,0.04);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.p-6.max-w-xl.mx-auto input[type="text"], .p-6.max-w-xl.mx-auto input[type="url"]{
+	margin-top:10px;
+	margin-bottom:14px;
+	padding:12px 14px;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+.p-6.max-w-xl.mx-auto h1, .p-6.max-w-xl.mx-auto h2{margin-top:0}
+
